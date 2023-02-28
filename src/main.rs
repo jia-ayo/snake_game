@@ -1,16 +1,11 @@
 fn main() {
-    let is_it_fun: bool = false;
-    //i32== signed interger of 32bits
-    //signed can hold positive and negative value
-    let num = 10;
-    //u32->2^32 -1
-    //u8== unsigned interger of 8 bits
-    //u8->2^8 -1
-    let small_num: u8 = 255;
-    //-2^7 -> 2^7-1 
-    let small_num_2: i8 = 127;
-
-    //operating system relative type
-    let sys_num: isize = -10;
-    let sys_num_2: usize = 10;
+    //_ => formating purpose for readability
+    let custom_num = 98_000;//98000
+    let hex_num= 0xfa;//250
+    let bin_num = 0b0010_1011;//43
+    let byte_num = b'A';//  
+    println!("{}", custom_num);
+    println!("{}", hex_num);
+    println!("{}", bin_num);
+    println!("{}", byte_num);
 }
