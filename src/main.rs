@@ -1,32 +1,19 @@
 fn main(){
-    c();
-    d();
-    f();
-}
-fn a(){
-    println!("calling a");
-    d()
-}
-fn b(){
-    println!("calling b")
+    //you can place on stack only values with static size
+    let a = 10;
+    let b = a;
+    let c = 15;
+    let d = add(a, b);
+
+    let message = String::from("Hello");
+    let message_2 = message;
+    
+    //cannot use message because it was moved to message_2
+    //println!("{}", message);
+    println!("{}", message_2);
 }
 
-fn c(){
-    println!("calling c")
+fn add(x: u32, y: u32) ->u32{
+    let sum = x+y;
+    sum
 }
-
-fn d(){
-    println!("calling d");
-    a()
-}
-
-fn e(){
-    println!("calling e")
-}
-
-fn f(){
-    println!("calling f");
-    b()
-}
-
-//xxd -g1 main
