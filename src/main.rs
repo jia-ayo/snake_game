@@ -1,19 +1,16 @@
 fn main(){
-    //you can place on stack only values with static size
-    let a = 10;
-    let b = a;
-    let c = 15;
-    let d = add(a, b);
-
-    let message = String::from("Hello");
-    let message_2 = message;
-    
-    //cannot use message because it was moved to message_2
-    //println!("{}", message);
-    println!("{}", message_2);
+   let message = String::from("Hello");//message comming into the scope
+   print_message(message);//message is moved into print messsage function
+   //message is no longer valide
 }
+//message is going out of the scope
+//but nothing more will happen because it was moved into print_message
 
-fn add(x: u32, y: u32) ->u32{
-    let sum = x+y;
-    sum
+fn print_message(a: String) {//a comes into the scope
+    println!("{}", a);
+    let c = a;//c is coming into the scope and a is moved into c 
+    //a is no longer valid
 }
+//a is going out of the scope, but nothing more will happen because it was moved
+//c is going out of the scope and "drop"
+//is called wich clears the memory from the heap
