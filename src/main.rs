@@ -1,16 +1,13 @@
 fn main(){
     let mut message = String::from("Hello");
-    let message_3= &message;
-    println!("{}", message_3);
-    let message_2: &mut String =  &mut message;
-
+    let message_2= &mut message;
    
-    unpredictable_mutate(message_2);
+   // * => dereferenceing 
+    (*message_2).push_str(" world");
+
+
     
     
-    println!("{}", message);
+    println!("{}", message_2);
 }
 
-fn unpredictable_mutate(val:&mut String){
-    val.push_str("_unpredictable")
-}
