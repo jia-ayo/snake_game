@@ -1,13 +1,10 @@
 fn main(){
-    let mut message = String::from("Hello");
-    let message_2= &mut message;
+    let a = 10;
+    let b = &a;
+    let c = &b;
    
-   // * => dereferenceing 
-    (*message_2).push_str(" world");
-
-
+   // ** => dereferenceing a reference of a reference
+   println!("{}", a == **c); 
     
-    
-    println!("{}", message_2);
 }
 
