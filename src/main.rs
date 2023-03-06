@@ -1,15 +1,9 @@
 fn main(){
-    //String => has a pointer, length and capacity which allows there to increase the capacity
     let mut message = String::from("Hello");
-    //str => has a pointer, length without a capacity which does not allow increase in capacity
-    let name = "Flip";
+    let slice = &message[2..4];//2 -> 3
+    //H E L L O
+    //0 1 2 3 4
 
-
-    //String
-    message.push_str(" world");
-    
-    //str so you cant add more capacity/words
-    //name.push_str(" Jerga");
-    
+    println!("{}", slice);
 }
 
