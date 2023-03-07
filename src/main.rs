@@ -5,33 +5,37 @@ struct Person{
 }
 impl Person {
     //associated functiion
-    fn some_function(){
-        println!("some function")
+    fn new() -> Person{
+        Person { 
+            name: "default".to_string(), 
+            last_name: "default".to_string(), 
+            age: 0 
+        }
     }
 
-    //method
-    //first is always self which reprecent the instance of the method
-    //method is been called on 
-    //within an impl block, the type self is an alias for the current type
-    fn display_age(&self){
-        println!("current age: {}", self.age)
+    fn from(name:String,last_name:String, age:u32)->Person{
+        Person { 
+            name, 
+            last_name,
+            age 
+        }
+    }
+
+    fn change_age(&mut self, new_age:u32){
+        self.age = new_age;
+
     }
 }
 fn main(){
-    Person::some_function();
-
-    let person= Person{
-        name: "jia".to_string(),
-        last_name: "ayo".to_string(),
-        age:20
-    };
-    let person_2= Person{
-        name: "tia".to_string(),
-        last_name: "chin".to_string(),
-        age:24
-    };
-    person.display_age();
-    person_2.display_age();
-    println!("{} {} is {}", person.last_name, person.name, person.age)
+    let mut person= Person::new();
+    let person_2 = Person::from(
+        String::from("joshua"),
+        String::from("joshua"),
+        30
+    );
+    
+    person.change_age(32); 
+    
+    println!("{} {} is {}", person.last_name, person.name, person.age);
+    println!("{} {} is {}", person_2.last_name, person_2.name, person_2.age)
 }
-
