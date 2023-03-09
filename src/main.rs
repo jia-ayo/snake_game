@@ -46,12 +46,17 @@ fn main(){
     
     println!("{:?}", person.id);
     println!("{:?}", person_2.id);
-    
+
     check_person_id(person.id);
     //check_person_id(person_2.id);
 }
 
 fn check_person_id(id: PersonId){
+    if let  PersonId::Passport(num)=id{
+        println!("It matching Passport {}", num)
+    }else {
+        println!("It doesn't match!")
+    }
     match id{
         PersonId::IdentityCard(x, y, z)=>{
             println!("ID Card: first value: {}", x);
