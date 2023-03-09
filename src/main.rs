@@ -9,6 +9,9 @@ struct Person{
     age: u32,
     id: PersonId
 }
+
+struct Animal( String, u32, String);
+
 impl Person {
     //associated functiion
     fn new() -> Person{
@@ -57,13 +60,20 @@ fn check_person_id(id: PersonId){
     }else {
         println!("It doesn't match!")
     }
-    match id{
+    let result = match id{
         PersonId::IdentityCard(x, y, z)=>{
-            println!("ID Card: first value: {}", x);
+            y
             
         },
         PersonId::Passport(x)=>{
-            println!("Passport - {}", x )
+            x
         }
-    }
+        
+    };
+
+    let animal = Animal("dog".to_string(), 10,"bulldog".to_string());
+
+    let Animal(animal_type, age, breed)= animal;
+    println!("{}", animal_type);
+    println!("Result: {}", result)
 }
