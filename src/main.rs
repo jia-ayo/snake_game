@@ -1,3 +1,9 @@
+trait Log{
+    fn display_info(&self);
+    fn alert_something(&self){
+        println!("Default implementation!!!!!!")
+    }
+}
 #[derive(Debug)]
 enum PersonId{
     Passport(u32),
@@ -11,6 +17,22 @@ struct Person{
 }
 
 struct Animal( String, u32, String);
+
+impl Log for Animal {
+    fn display_info(&self) {
+        println!("{}", self.0);
+    }
+
+    fn alert_something(&self) {
+        println!("Animal implentation!!!!")
+    }
+}
+
+impl Log for Person{
+    fn display_info(&self){
+        println!("{} {} {} {:?}", self.name, self.last_name, self.age, self.id)
+    }
+}
 
 impl Person {
     //associated functiion
@@ -38,7 +60,7 @@ impl Person {
     }
 }
 fn main(){
-    let mut person= Person::new();
+    let person= Person::new();
     let person_2 = Person::from(
         String::from("joshua"),
         String::from("joshua"),
@@ -49,6 +71,11 @@ fn main(){
     
     println!("{:?}", person.id);
     println!("{:?}", person_2.id);
+
+    person.change_age(32);
+
+    person.alert_something();
+    person_2.alert_something();
 
     check_person_id(person.id);
     //check_person_id(person_2.id);
@@ -75,5 +102,5 @@ fn check_person_id(id: PersonId){
 
     let Animal(animal_type, age, breed)= animal;
     println!("{}", animal_type);
-    println!("Result: {}", result)
+    println!("Result: {}", result);
 }
