@@ -60,47 +60,28 @@ impl Person {
     }
 }
 fn main(){
-    let person= Person::new();
-    let person_2 = Person::from(
-        String::from("joshua"),
-        String::from("joshua"),
-        30,
-        PersonId::IdentityCard(233, 444, 456)
-    );
-    
+    let mut person= Person::new();
+    let animal = Animal("dog".to_string(), 10,"bulldog".to_string());
     
     println!("{:?}", person.id);
-    println!("{:?}", person_2.id);
 
     person.change_age(32);
-
-    person.alert_something();
-    person_2.alert_something();
-
-    check_person_id(person.id);
-    //check_person_id(person_2.id);
+    
+    log_info(person);
+    log_info_2(&animal);
 }
 
-fn check_person_id(id: PersonId){
-    if let  PersonId::Passport(num)=id{
-        println!("It matching Passport {}", num)
-    }else {
-        println!("It doesn't match!")
-    }
-    let result = match id{
-        PersonId::IdentityCard(x, y, z)=>{
-            y
-            
-        },
-        PersonId::Passport(x)=>{
-            x
-        }
-        
-    };
 
-    let animal = Animal("dog".to_string(), 10,"bulldog".to_string());
 
-    let Animal(animal_type, age, breed)= animal;
-    println!("{}", animal_type);
-    println!("Result: {}", result);
+//impl makes the compiler determine type at the compile time
+//it will create multiple versions of the function, depending on 
+//how many types Log traits implementing (Person, Animal)
+fn log_info(val: impl Log){
+    val.alert_something();
+}
+
+//dyn is short for dynamic, and says that function shouldperform dynamic dispatch
+//decission of exactely which function to call at the runtime
+fn log_info_2(val: &dyn Log){
+    val.alert_something();
 }
