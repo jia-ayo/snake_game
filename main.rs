@@ -1,4 +1,4 @@
-use snake_game::{Person, Animal, log_info, log_info_2};
+use snake_game::learning_rust::{Person, Animal, log_info, log_info_2};
 
 //use snake_game::*;
 fn main(){
