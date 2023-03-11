@@ -1,22 +1,22 @@
-trait Log{
+pub trait Log{
     fn display_info(&self);
     fn alert_something(&self){
         println!("Default implementation!!!!!!")
     }
 }
 #[derive(Debug)]
-enum PersonId{
+pub enum PersonId{
     Passport(u32),
     IdentityCard(u32, u32, u32)
 }
-struct Person{
-    name: String,//fields
-    last_name: String,
-    age: u32,
-    id: PersonId
+pub struct Person{
+    pub name: String,//fields
+    pub last_name: String,
+    pub age: u32,
+    pub id: PersonId
 }
 
-struct Animal( String, u32, String);
+pub struct Animal( pub String, pub u32,pub String);
 
 impl Log for Animal {
     fn display_info(&self) {
@@ -36,7 +36,7 @@ impl Log for Person{
 
 impl Person {
     //associated functiion
-    fn new() -> Person{
+    pub fn new() -> Person{
         Person { 
             name: "default".to_string(), 
             last_name: "default".to_string(), 
@@ -54,34 +54,22 @@ impl Person {
         }
     }
 
-    fn change_age(&mut self, new_age:u32){
+    pub fn change_age(&mut self, new_age:u32){
         self.age = new_age;
 
     }
 }
-fn main(){
-    let mut person= Person::new();
-    let animal = Animal("dog".to_string(), 10,"bulldog".to_string());
-    
-    println!("{:?}", person.id);
-
-    person.change_age(32);
-    
-    log_info(person);
-    log_info_2(&animal);
-}
-
 
 
 //impl makes the compiler determine type at the compile time
 //it will create multiple versions of the function, depending on 
 //how many types Log traits implementing (Person, Animal)
-fn log_info(val: impl Log){
+pub fn log_info(val: impl Log){
     val.alert_something();
 }
 
 //dyn is short for dynamic, and says that function shouldperform dynamic dispatch
 //decission of exactely which function to call at the runtime
-fn log_info_2(val: &dyn Log){
+pub fn log_info_2(val: &dyn Log){
     val.alert_something();
 }
