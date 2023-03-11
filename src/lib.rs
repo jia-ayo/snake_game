@@ -1,4 +1,16 @@
 pub mod  learning_rust{
+    use crate::learning_rust;
+
+    mod top_level{
+        pub fn hi_there(){
+            println!("hi there");
+        }
+        pub mod low_level{
+            pub fn hello_world(){
+                println!("hello world")
+            }
+        }
+    }
     pub trait Log{
         fn display_info(&self);
         fn alert_something(&self){
@@ -31,6 +43,7 @@ pub mod  learning_rust{
 
     impl Log for Person{
         fn display_info(&self){
+            top_level::low_level::hello_world();
             println!("{} {} {} {:?}", self.name, self.last_name, self.age, self.id)
         }
     }
