@@ -1,5 +1,4 @@
 pub mod  learning_rust{
-    use crate::learning_rust;
 
     mod top_level{
         pub fn hi_there(){
@@ -23,10 +22,10 @@ pub mod  learning_rust{
         IdentityCard(u32, u32, u32)
     }
     pub struct Person{
-        pub name: String,//fields
-        pub last_name: String,
-        pub age: u32,
-        pub id: PersonId
+        name: String,//fields
+        last_name: String,
+        age: u32,
+         id: PersonId
     }
 
     pub struct Animal( pub String, pub u32,pub String);
@@ -43,6 +42,7 @@ pub mod  learning_rust{
 
     impl Log for Person{
         fn display_info(&self){
+            top_level::hi_there();
             top_level::low_level::hello_world();
             println!("{} {} {} {:?}", self.name, self.last_name, self.age, self.id)
         }
@@ -66,6 +66,10 @@ pub mod  learning_rust{
                 age,
                 id
             }
+        }
+
+        pub fn name(&self) ->&String{
+            &self.name
         }
 
         pub fn change_age(&mut self, new_age:u32){
