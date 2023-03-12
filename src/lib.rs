@@ -1,15 +1,20 @@
+fn outsider(){
+    println!("outside fn!!")
+}
+
+
 pub mod  learning_rust{
 
-    mod top_level{
-        pub fn hi_there(){
-            println!("hi there");
-        }
-        pub mod low_level{
-            pub fn hello_world(){
-                println!("hello world")
-            }
-        }
-    }
+    // mod top_level{
+    //     pub fn hi_there(){
+    //         println!("hi there");
+    //     }
+    //     pub mod low_level{
+    //         pub fn hello_world(){
+    //             println!("hello world")
+    //         }
+    //     }
+    // }
     pub trait Log{
         fn display_info(&self);
         fn alert_something(&self){
@@ -42,8 +47,9 @@ pub mod  learning_rust{
 
     impl Log for Person{
         fn display_info(&self){
-            top_level::hi_there();
-            top_level::low_level::hello_world();
+            //crate::outsider();
+            //supr going outside of current module
+            super::outsider();
             println!("{} {} {} {:?}", self.name, self.last_name, self.age, self.id)
         }
     }
