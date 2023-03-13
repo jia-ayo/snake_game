@@ -1,4 +1,7 @@
+mod another_lip;
+use another_lip::another_mod;
 fn outsider(){
+    another_mod::another_fn();
     println!("outside fn!!")
 }
 
