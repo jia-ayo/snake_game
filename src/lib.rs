@@ -7,7 +7,7 @@ fn outsider(){
 
 
 pub mod  learning_rust{
-
+    use std::fmt;
     // mod top_level{
     //     pub fn hi_there(){
     //         println!("hi there");
@@ -24,16 +24,29 @@ pub mod  learning_rust{
             println!("Default implementation!!!!!!")
         }
     }
-    #[derive(Debug)]
+  
     pub enum PersonId{
         Passport(u32),
         IdentityCard(u32, u32, u32)
+    }
+
+    impl fmt::Display for PersonId{
+        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+           match self{
+            PersonId::Passport(x)=>{
+                write!(f, "MY PASSPORT: {}", x)
+            }
+            PersonId::IdentityCard(x, y, z)=>{
+                write!(f, "This is my ID: ----> {} {} {} <----", x, y, z)
+            }
+           }
+        }
     }
     pub struct Person{
         name: String,//fields
         last_name: String,
         age: u32,
-         id: PersonId
+        pub id: PersonId
     }
 
     pub struct Animal( pub String, pub u32,pub String);
@@ -53,7 +66,7 @@ pub mod  learning_rust{
             //crate::outsider();
             //supr going outside of current module
             super::outsider();
-            println!("{} {} {} {:?}", self.name, self.last_name, self.age, self.id)
+            println!("{} {} {} {}", self.name, self.last_name, self.age, self.id)
         }
     }
 
