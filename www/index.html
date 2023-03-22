@@ -12,23 +12,4 @@
   </body>
 </html>
 
-<!-- we can either create memory in webassembly and export it to javascript   -->
-<!-- we can either create memory in js and import it to webassembly -->
-<!-- 1 in memory -> 1 page of memory, page has around 64kb -->
-<!-- 
-(module
-  (import "console" "log" (func $log))
-  (import "console" "error" (func $error))
-  (memory (import "js" "mem") 1)
-  (data (i32.const 0) "hi")
-  (func $sum(param $a i32) (param $b i32) (result i32)
-    call $log
-    call $error
-    local.get $a
-    local.get $b
-    i32.add 
-  )
-  (export "mem" (mem
-  (export "sum" (func $sum))
-) 
--->
+
