@@ -37,15 +37,22 @@ init().then(_ => {
     );
     ctx.stroke();
   }
-
-  
-  drawWorld();
+  function paint() {
+      drawWorld();
   drawSnake();
+  }
+  
+  function update() {
+    setTimeout(() => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      world.update();
+      paint();
+      //the method the request animation takes a call back to invoked before the next repaint
+      requestAnimationFrame(update)
+    }, 100)
+  }
 
-  setInterval(() => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    drawWorld();
-    drawSnake();
-    world.update();
-  }, 100)
+  paint();
+  update();
+ 
 })
