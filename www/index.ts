@@ -3,12 +3,15 @@ import init, { World } from "snake_game";
 
 init().then(_ => {
   const CELL_SIZE = 20;
-  const world = World.new();
+  const WORLD_WIDTH = 8;
+  const SnakeSpawnIdx = Date.now() % (WORLD_WIDTH * WORLD_WIDTH);
+
+  const world = World.new(WORLD_WIDTH, SnakeSpawnIdx);
   const worldWidth = world.width();
 
   const canvas =<HTMLCanvasElement> document.getElementById("snake_canvas");
   const ctx = canvas.getContext("2d");
-  
+
   canvas.height = worldWidth * CELL_SIZE;
   canvas.width = worldWidth * CELL_SIZE;
   function drawWorld() {
@@ -45,13 +48,14 @@ init().then(_ => {
   }
   
   function update() {
+    const fps = 5;
     setTimeout(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       world.update();
       paint();
       //the method the request animation takes a call back to invoked before the next repaint
       requestAnimationFrame(update)
-    }, 100)
+    }, 1000/fps)
   }
 
   paint();

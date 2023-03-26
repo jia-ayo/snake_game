@@ -3,6 +3,10 @@ use wee_alloc::WeeAlloc;
 #[global_allocator]
 static ALLOC: WeeAlloc = WeeAlloc::INIT;
 
+enum Direction{
+    
+}
+
 struct SnakeCell(usize);
 struct Snake {
     body: Vec<SnakeCell>,
@@ -23,12 +27,11 @@ pub struct World {
 
 #[wasm_bindgen]
 impl World {
-    pub fn new() -> World {
-        let width = 8;
+    pub fn new(width: usize, snake_idx: usize) -> World {
         World {
             width,
             size: width * width,
-            snake: Snake::new(10),
+            snake: Snake::new(snake_idx ),
         }
     }
     pub fn width(&self) -> usize {
