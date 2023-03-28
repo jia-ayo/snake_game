@@ -1,4 +1,4 @@
-use wasm_bindgen::prelude::*;
+cd use wasm_bindgen::prelude::*;
 use wee_alloc::WeeAlloc;
 #[global_allocator]
 static ALLOC: WeeAlloc = WeeAlloc::INIT;
@@ -69,25 +69,6 @@ impl World {
         let next_idx= self.cell_to_index(row, col);
         self.set_snake_head(next_idx);
         
-        
-        // HARD CODED SOLUTION 
-        // if self.snake.direction == Direction::Right{
-        //     let next_col= (col + 1) % self.width;
-        //     self.snake.body[0].0 = (row * self.width) + next_col;
-        // }
-        // if self.snake.direction == Direction::Left{
-        //     let next_col= (col - 1) % self.width;
-        //     self.snake.body[0].0 = (row * self.width) + next_col;
-        // }
-        // if self.snake.direction == Direction::Up{
-        //     let next_row= (row - 1) % self.width;
-        //     self.snake.body[0].0 = (next_row * self.width) + col;
-        // }
-        // if self.snake.direction == Direction::Down{
-        //     let next_row = (row + 1) % self.width;
-        //     self.snake.body[0].0 = (next_row * self.width) + col;
-        // }
-
     }
 
     fn set_snake_head(&mut self, idx: usize){
