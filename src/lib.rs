@@ -1,5 +1,6 @@
 use wasm_bindgen::prelude::*;
 use wee_alloc::WeeAlloc;
+
 #[global_allocator]
 static ALLOC: WeeAlloc = WeeAlloc::INIT;
 
@@ -17,10 +18,18 @@ struct Snake {
     body: Vec<SnakeCell>,
     direction: Direction
 }
+
 impl Snake {
-    fn new(spawn_index: usize) -> Snake {
+    fn new(spawn_index: usize, size: usize) -> Snake {
+        let mut body = vec!();
+
+        for i in 0..size{
+            body.push(SnakeCell(spawn_index-1));
+        }
+
+
         Snake {
-            body: vec![SnakeCell(spawn_index)],
+            body,
             direction: Direction::Right,
         }
     }
@@ -38,7 +47,7 @@ impl World {
         World {
             width,
             size: width * width,
-            snake: Snake::new(snake_idx ),
+            snake: Snake::new(snake_idx, 3),
         }
     }
     pub fn width(&self) -> usize {
