@@ -66,18 +66,12 @@ impl World {
     pub fn snake_length(&self)-> usize{
         self.snake.body.len()
     }
-    
-    //*const => raw pointer 
-    //borowwing rules doesnt apply to it
+
     pub fn snake_cells(&self)-> *const SnakeCell{
         self.snake.body.as_ptr()
     }
 
-    //cannot return reference to JS because of borring rules
-    // pub fn snake_cells(&self)-> &Vec<SnakeCell>{
-    //     &self.snake.body
-    // }
-
+    
     pub fn update(&mut self) {
         let snake_idx = self.snake_head_idx();
       
