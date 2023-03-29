@@ -79,7 +79,7 @@ init().then((wasm) => {
     const fps = 10;
     setTimeout(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      world.update();
+      world.step();
       paint();
       //the method the request animation takes a call back to invoked before the next repaint
       requestAnimationFrame(update);

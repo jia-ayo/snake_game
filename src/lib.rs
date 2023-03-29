@@ -27,7 +27,6 @@ impl Snake {
             body.push(SnakeCell(spawn_index-1));
         }
 
-
         Snake {
             body,
             direction: Direction::Right,
@@ -71,41 +70,50 @@ impl World {
         self.snake.body.as_ptr()
     }
 
-    
-    pub fn update(&mut self) {
-        let snake_idx = self.snake_head_idx();
-      
-        let (row, col) = self.index_to_cell(snake_idx);
+    pub fn step(&mut self) {
         
-        let (row, col) = match self.snake.direction{
-             Direction::Right =>{
-                (row, (col + 1) % self.width)
+        let next_cell = self.gen_next_snake_cell();
+        self.snake.body[0] = next_cell;
+    }
+
+    fn gen_next_snake_cell(&self)-> SnakeCell{
+        let snake_idx = self.snake_head_idx();
+        let row = snake_idx / self.width;
+      
+        return match self.snake.direction{
+             Direction::Right => {
+                let treshold = (row + 1) * self.width;
+                if snake_idx + 1 == treshold {
+                    SnakeCell(treshold - self.width)
+                } else {
+                    SnakeCell(snake_idx + 1)
+                }
              },
              Direction::Left =>{
-                (row, (col - 1) % self.width)
+                let treshold = (row ) * self.width;
+                if snake_idx  == treshold {
+                    SnakeCell(treshold + (self.width - 1))
+                } else {
+                    SnakeCell(snake_idx - 1)
+                }
              },
              Direction::Up =>{
-                ((row - 1) % self.width, col)
+               let treshold = snake_idx - (row * self.width);
+                if snake_idx  == treshold {
+                    SnakeCell((self.size - self.width) + treshold)
+                } else {
+                    SnakeCell(snake_idx - self.width)
+                }
              }, 
              Direction::Down =>{
-                ((row + 1) % self.width, col)
-             }
-        };
-        let next_idx= self.cell_to_index(row, col);
-        self.set_snake_head(next_idx);
-        
-    }
-
-    fn set_snake_head(&mut self, idx: usize){
-        self.snake.body[0].0 = idx;
-    }
-
-    fn index_to_cell(&self, idx:usize)->(usize, usize){
-        (idx / self.width, idx % self.width)
-    }
-
-    fn cell_to_index(&self, row: usize, col: usize)->usize{
-        (row * self.width) + col
+                let treshold = snake_idx + ((self.width- row)* self.width);
+                if snake_idx + self.width  == treshold {
+                    SnakeCell(treshold - ((row + 1) * self.width))
+                } else {
+                    SnakeCell(snake_idx + self.width)
+                }
+            }
+        }; 
     }
 }
 
