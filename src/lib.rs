@@ -4,6 +4,11 @@ use wee_alloc::WeeAlloc;
 #[global_allocator]
 static ALLOC: WeeAlloc = WeeAlloc::INIT;
 
+#[wasm_bindgen(module="/www/utils/date.js" )]
+extern {
+    fn now() -> usize;
+}
+
 #[wasm_bindgen]
 #[derive(PartialEq)]
 pub enum Direction{
@@ -24,7 +29,7 @@ impl Snake {
     fn new(spawn_index: usize, size: usize) -> Snake {
         let mut body = vec!();
 
-        for i in 0..size{
+        for _i in 0..size{
             body.push(SnakeCell(spawn_index-1));
         }
 
@@ -46,12 +51,14 @@ pub struct World {
 #[wasm_bindgen]
 impl World {
     pub fn new(width: usize, snake_idx: usize) -> World {
+        let size = width * width;
+        let reward_cell = now() % size;
         World {
             width,
-            size: width * width,
+            size,
             snake: Snake::new(snake_idx, 3),
             next_cell: None,
-            reward_cell: 10
+            reward_cell
         }
     }
 
