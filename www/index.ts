@@ -58,6 +58,9 @@ init().then((wasm) => {
     ctx.fillRect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 
     ctx.stroke();
+    if (idx == 1000) {
+      alert("you won")
+    }
   }
   function drawSnake() {
     const snakeCells = new Uint32Array(
