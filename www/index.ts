@@ -4,13 +4,25 @@ import { rnd } from "./utils/rnd";
 init().then((wasm) => {
   const CELL_SIZE = 20;
   const WORLD_WIDTH = 8;
-  const SnakeSpawnIdx =  rnd(WORLD_WIDTH * WORLD_WIDTH);
+  const SnakeSpawnIdx = rnd(WORLD_WIDTH * WORLD_WIDTH);
 
   const world = World.new(WORLD_WIDTH, SnakeSpawnIdx);
   const worldWidth = world.width();
 
+  const gameControlBtn = document.getElementById("game-control-btn");
+
   const canvas = <HTMLCanvasElement>document.getElementById("snake_canvas");
   const ctx = canvas.getContext("2d");
+
+  gameControlBtn.addEventListener("click", (_) => {
+    const gameStatus = world.gmae_status();
+    if (gameStatus === undefined) {
+      world.start_game();
+      play();
+    } else {
+      location.reload();
+    }
+  });
 
   canvas.height = worldWidth * CELL_SIZE;
   canvas.width = worldWidth * CELL_SIZE;
@@ -59,7 +71,7 @@ init().then((wasm) => {
 
     ctx.stroke();
     if (idx == 1000) {
-      alert("you won")
+      alert("you won");
     }
   }
   function drawSnake() {
@@ -87,17 +99,16 @@ init().then((wasm) => {
     drawReward();
   }
 
-  function update() {
+  function play() {
     const fps = 10;
     setTimeout(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       world.step();
       paint();
       //the method the request animation takes a call back to invoked before the next repaint
-      requestAnimationFrame(update);
+      requestAnimationFrame(play);
     }, 1000 / fps);
   }
 
   paint();
-  update();
 });
