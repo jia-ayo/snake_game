@@ -100,8 +100,17 @@ impl World {
         self.status = Some(GameStatus::Played)
     }
 
-    pub fn gmae_status(&self)->Option<GameStatus>{
+    pub fn game_status(&self)->Option<GameStatus>{
         self.status
+    }
+
+    pub fn game_status_text(&self) -> String{
+        match self.status{
+            Some(GameStatus::Won) => String::from("you have won!"),
+            Some(GameStatus::Lost) => String::from("you have Lost!"),
+            Some(GameStatus::Played) => String::from("Playing"),
+            None => String::from("No Status..")
+        }
     }
 
     pub fn change_snake_dir(&mut self, direction: Direction){
