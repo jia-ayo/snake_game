@@ -94,13 +94,13 @@ init().then((wasm) => {
         ctx.fillRect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
       });
 
-    ctx.stroke(); 
+    ctx.stroke();
   }
 
   function drawGameStatus() {
     gameStatus.textContent = world.game_status_text();
     points.textContent = world.points().toString();
-  } 
+  }
 
   function paint() {
     drawWorld();
@@ -115,7 +115,6 @@ init().then((wasm) => {
       gameControlBtn.textContent = "Re-play";
       return
     }
-    
 
     const fps = 10;
     setTimeout(() => {
