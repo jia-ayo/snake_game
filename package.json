@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
     "build": "npm run build --prefix www",
-    "postinstall": "cd www && npm install"
+    "postinstall": "cd www && npm install",
+    "postdinstall": "cd pkg && npm install "
 
   },
   "repository": {
