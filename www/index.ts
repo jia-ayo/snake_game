@@ -1,6 +1,7 @@
-const { init, World, Direction, GameStatus } = require("../pkg/snake_game");
-//import init, { World, Direction, GameStatus } from "snake_game";
+const path = `${__dirname}`;
+import init, { World, Direction, GameStatus } from "snake_game";
 import { rnd } from "./utils/rnd";
+console.log(__dirname);
 
 init().then((wasm) => {
   const CELL_SIZE = 30;
@@ -10,7 +11,7 @@ init().then((wasm) => {
   const world = World.new(WORLD_WIDTH, SnakeSpawnIdx);
   const worldWidth = world.width();
 
-  const points  = document.getElementById("points");
+  const points = document.getElementById("points");
   const gameStatus = document.getElementById("game-status");
   const gameControlBtn = document.getElementById("game-control-btn");
 
@@ -114,7 +115,7 @@ init().then((wasm) => {
     const status = world.game_status();
     if (status == GameStatus.Won || status == GameStatus.Lost) {
       gameControlBtn.textContent = "Re-play";
-      return
+      return;
     }
 
     const fps = 10;
