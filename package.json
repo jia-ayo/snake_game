@@ -7,7 +7,6 @@
     "start": "node server/index.js",
     "build": "npm run build --prefix www",
     "postinstall": "cd www && npm install"
-
   },
   "repository": {
     "type": "git",
