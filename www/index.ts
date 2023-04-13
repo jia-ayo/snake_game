@@ -1,7 +1,5 @@
-const path = `${__dirname}`;
 import init, { World, Direction, GameStatus } from "snake_game";
 import { rnd } from "./utils/rnd";
-console.log(__dirname);
 
 init().then((wasm) => {
   const CELL_SIZE = 30;
