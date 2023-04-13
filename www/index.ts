@@ -1,3 +1,4 @@
+//const { init, World, Direction, GameStatus } = require("../pkg/snake_game");
 import init, { World, Direction, GameStatus } from "snake_game";
 import { rnd } from "./utils/rnd";
 
